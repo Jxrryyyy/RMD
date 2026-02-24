@@ -1,4 +1,4 @@
-console.log('Test')
+ 
 function formatJson(obj) {
     return JSON.stringify(obj, null, 2);
 }
