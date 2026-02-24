@@ -11,10 +11,16 @@ from pydantic import BaseModel, Field
 
 app = FastAPI()
 
-BASE_DIR = Path(__file__).resolve().parent.parent # Point to root
-templates = Jinja2Templates(directory=str(BASE_DIR))
-app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="static") 
+# Path(__file__) is .../api/index.py
+# .parent is .../api/
+# .parent.parent is your ROOT folder
+BASE_DIR = Path(__file__).resolve().parent.parent 
 
+# Mount static from the root
+app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="static")
+
+# Look for index.html in the root
+templates = Jinja2Templates(directory=str(BASE_DIR))
 class RuleInput(BaseModel):
     name: str = Field(min_length=1)
     field: str = Field(min_length=1)
