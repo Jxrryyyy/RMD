@@ -11,10 +11,10 @@ from pydantic import BaseModel, Field
 
 app = FastAPI(title="Rule-Based Model System")
 
-BASE_DIR = Path(__file__).resolve().parent
+ BASE_DIR = Path(__file__).resolve().parent.parent 
 
-app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="static")
-templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
+ app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="static")
+templates = Jinja2Templates(directory=str(BASE_DIR)) 
 
 
 class RuleInput(BaseModel):
